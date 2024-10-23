@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import AuthContainer from "@/layouts/AuthContainer";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import { useRouter } from "next/navigation";
 import { login } from "@/lib/firebaseAuth";
+import AuthProvider, { AuthContext, useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const { setUser, user } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,32 +23,36 @@ export default function Login() {
     const creds = Object.fromEntries(formData.entries());
 
     try {
-      const user = await login(creds);
-      console.log(user);
-      // router.push("/");
+      await login(creds).then((userCredential) => {
+        setUser(userCredential);
+      });
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      router.push("/users");
+    }
+  }, [user, router]);
+
   return (
     <AuthContainer>
       <form className="w-full" onSubmit={handleSubmit}>
         <Input id="email" name="email" label="Email" type="email" />
         <Input id="password" name="password" label="Password" type="password" />
-        <Button block type="submit">
+        <Button block type="submit" disabled={loading}>
           Sign In
-        </Button>
-        <Button block type="button" className="bg-blue-500 mt-3">
-          Sign In With Google
         </Button>
       </form>
       <p className="text-center w-full">
         Don&apos;t Have Account?{" "}
-        <a href="#" className="text-blue-500">
+        <Link href="/register" className="text-blue-500">
           Register
-        </a>
+        </Link>
       </p>
     </AuthContainer>
   );
