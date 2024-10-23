@@ -23,9 +23,7 @@ export default function Register() {
     const creds = Object.fromEntries(formData.entries());
 
     try {
-      await signUp(creds).then((userCredential) => {
-        setUser(userCredential.user);
-      });
+      await signUp(creds);
     } catch (error) {
       setError(error);
     } finally {

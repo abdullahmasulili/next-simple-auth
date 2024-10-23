@@ -23,9 +23,7 @@ export default function Login() {
     const creds = Object.fromEntries(formData.entries());
 
     try {
-      await login(creds).then((userCredential) => {
-        setUser(userCredential);
-      });
+      await login(creds);
     } catch (error) {
       setError(error);
     } finally {
