@@ -14,6 +14,7 @@ export default function Input({ id, label, ...props }) {
     "focus:border-amber-300",
     "bg-transparent",
     "mb-5",
+    "text-amber-300",
   ].join(" ");
 
   return (
