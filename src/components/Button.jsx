@@ -3,13 +3,22 @@ import React from "react";
 export default function Button({
   children,
   block,
+  disabled,
   className: style,
   ...props
 }) {
-  const btnWidth = block ? "w-full" : "w-24";
+  const btnWidth = block ? "w-full" : "w-fit-content";
   const defaultStyling = ["bg-white", "text-black"];
   const customStyling = style?.split(" ");
   const fixStyling = ["p-2", "rounded-lg"];
+  const disabledStyle = [
+    "bg-transparent",
+    "text-slate-400",
+    "border-2",
+    "border-slate-400",
+    btnWidth,
+    ...fixStyling,
+  ];
 
   let styling = [...fixStyling, btnWidth];
 
@@ -20,7 +29,11 @@ export default function Button({
   }
 
   return (
-    <button {...props} className={styling}>
+    <button
+      {...props}
+      className={disabled ? disabledStyle.join(" ") : styling}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
