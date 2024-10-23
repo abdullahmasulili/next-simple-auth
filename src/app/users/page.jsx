@@ -33,10 +33,15 @@ export default function Users() {
 
   return (
     <>
-      <header className="sticky top-0 h-fit-content bg-stone-900 flex items-center justify-between p-4">
+      <nav className="h-fit-content bg-stone-900 flex items-center justify-between p-4">
         <h1 className="text-xl">Welcome</h1>
-        <Button onClick={() => logout()}>Logout</Button>
-      </header>
+        <Button
+          onClick={() => logout()}
+          className="bg-transparent border-2 border-stone-700 px-5 rounded-full font-semibold"
+        >
+          Logout
+        </Button>
+      </nav>
       <main className="flex justify-center">
         <div className="container py-8 grid grid-cols-3 gap-2">
           {pageData?.data.map((user) => (
