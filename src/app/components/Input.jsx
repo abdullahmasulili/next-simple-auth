@@ -3,7 +3,7 @@ import React from "react";
 export default function Input({ id, label, ...props }) {
   const styling = [
     "w-full",
-    "my-2",
+    "mt-2",
     "h-10",
     "px-3",
     "rounded",
@@ -13,6 +13,7 @@ export default function Input({ id, label, ...props }) {
     "border-white",
     "focus:border-amber-300",
     "bg-transparent",
+    "mb-5",
   ].join(" ");
 
   return (
