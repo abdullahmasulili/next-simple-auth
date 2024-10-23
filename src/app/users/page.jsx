@@ -19,7 +19,7 @@ export default function Users() {
       }
 
       const resData = await response.json();
-      console.log(resData);
+
       setPageData(resData);
     } catch (error) {
       console.error(error);
