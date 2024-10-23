@@ -9,14 +9,16 @@ export default function Button({
   const btnWidth = block ? "w-full" : "w-24";
   const defaultStyling = ["bg-white", "text-black"];
   const customStyling = style?.split(" ");
-  let styling = ["p-2", "rounded-lg", btnWidth].join(" ");
+  const fixStyling = ["p-2", "rounded-lg"];
+
+  let styling = [...fixStyling, btnWidth];
 
   if (style) {
-    styling = [...styling, ...customStyling];
+    styling = styling.concat(customStyling).join(" ");
   } else {
-    styling = [...styling, ...defaultStyling];
+    styling = styling.concat(defaultStyling).join(" ");
   }
-
+  console.log(styling);
   return (
     <button {...props} className={styling}>
       {children}
