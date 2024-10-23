@@ -18,7 +18,7 @@ export default function Button({
   } else {
     styling = styling.concat(defaultStyling).join(" ");
   }
-  console.log(styling);
+
   return (
     <button {...props} className={styling}>
       {children}
