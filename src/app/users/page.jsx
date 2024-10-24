@@ -43,7 +43,7 @@ export default function Users() {
         </Button>
       </nav>
       <main className="flex justify-center">
-        <div className="container py-8 grid grid-cols-3 gap-2">
+        <div className="container p-8 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {pageData?.data.map((user) => (
             <Card
               key={user.last_name}
