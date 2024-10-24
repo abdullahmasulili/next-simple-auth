@@ -23,7 +23,10 @@ export default function Register() {
     const creds = Object.fromEntries(formData.entries());
 
     try {
-      await signUp(creds);
+      await signUp(creds).then((userCredential) => {
+        setUser(userCredential.user);
+        router.push("/users");
+      });
     } catch (error) {
       setError(error);
     } finally {
@@ -35,7 +38,7 @@ export default function Register() {
     if (user) {
       router.push("/users");
     }
-  });
+  }, [user, router]);
 
   return (
     <AuthContainer>

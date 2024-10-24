@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -23,7 +23,10 @@ export default function Login() {
     const creds = Object.fromEntries(formData.entries());
 
     try {
-      await login(creds);
+      await login(creds).then((userCredential) => {
+        setUser(userCredential.user);
+        router.push("/users");
+      });
     } catch (error) {
       setError(error);
     } finally {
